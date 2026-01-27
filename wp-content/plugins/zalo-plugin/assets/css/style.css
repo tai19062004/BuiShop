@@ -1,0 +1,159 @@
+/* Container cố định */
+.zalo-float-container {
+    position: fixed;
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    z-index: 9999;
+}
+
+/* ===== POSITIONS CUSTOME ===== */
+/* Góc trái dưới */
+.zalo-float-container.pos-bottom-left {
+    left: 20px;
+    bottom: 40px;
+    right: auto;
+    top: auto;
+}
+
+/* Góc phải dưới */
+.zalo-float-container.pos-bottom-right {
+    right: 20px;
+    bottom: 40px;
+    left: auto;
+    top: auto;
+}
+
+/* Góc trái trên */
+.zalo-float-container.pos-top-left {
+    left: 20px;
+    top: 120px;
+    right: auto;
+    bottom: auto;
+}
+
+/* Góc phải trên */
+.zalo-float-container.pos-top-right {
+    right: 20px;
+    top: 120px;
+    left: auto;
+    bottom: auto;
+}
+
+
+/* Mobile */
+@media (max-width: 768px) {
+    .pos-bottom-left,
+    .pos-bottom-right {
+        bottom: 90px;
+    }
+}
+
+/* Nút chung (BG phập phồng) */
+.zalo-float-btn {
+    position: relative;
+    width: 55px;
+    height: 55px;
+    border-radius: 50%;
+    background: #000;
+    display: flex;
+    padding: 10px;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    box-shadow: 0 4px 14px rgba(0,0,0,0.25);
+    animation: pulseZoom 1s infinite;
+    overflow: visible;
+}
+
+/* Vòng sóng lan */
+.zalo-float-btn::before {
+    content: "";
+    position: absolute;
+    inset: -8px;
+    border-radius: 50%;
+    opacity: 0.6;
+    animation: ripple 1s infinite;
+}
+
+/* Icon rung nhẹ */
+.zalo-float-btn::after {
+    content: "";
+    width: 100%;
+    height: 100%;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 70%;
+    animation: iconShake 0.8s infinite;
+}
+
+.zalo-custome {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+/* CALL */
+.call-btn {
+    background-color: #ff3a3a;
+    border: 2px solid #fff;
+}
+.call-btn::before {
+    background: rgba(40,167,69,0.35);
+}
+.call-btn::after {
+    background-image: url('../images/phone.png');
+}
+
+/* ZALO */
+.zalo-btn {
+    background-color: #0084FF;
+    border: 2px solid #fff;
+}
+.zalo-btn::before {
+    background: rgba(0,132,255,0.35);
+}
+.zalo-btn::after {
+    background-image: url('../images/zalo.png');
+}
+
+/* ===== ANIMATION ===== */
+
+/* BG phập phồng */
+@keyframes pulseZoom {
+    0%   { transform: scale(1); }
+    50%  { transform: scale(1.08); }
+    100% { transform: scale(1); }
+}
+
+/* Sóng lan */
+@keyframes ripple {
+    0% {
+        transform: scale(0.9);
+        opacity: 0.6;
+    }
+    100% {
+        transform: scale(1.6);
+        opacity: 0;
+    }
+}
+
+/* Icon lắc nhẹ */
+@keyframes iconShake {
+    0%,100% { transform: rotate(0); }
+    25% { transform: rotate(-10deg); }
+    50% { transform: rotate(10deg); }
+    75% { transform: rotate(-10deg); }
+}
+
+/* Mobile */
+@media(max-width: 768px) {
+    .zalo-float-container {
+        left: 10px;
+        bottom: 90px;
+    }
+    .zalo-float-btn {
+        width: 48px;
+        height: 48px;
+    }
+}

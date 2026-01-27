@@ -1,0 +1,6 @@
+2026-01-26T17:10:56+00:00 WARNING Không thể đồng bộ hóa các thư mục tải xuống sau bản cập nhật gần đây nhất.
+2026-01-26T17:11:01+00:00 ERROR HPOS tables are missing in the database and couldn't be created. The missing tables are: wp_wc_orders, wp_wc_order_addresses, wp_wc_order_operational_data, wp_wc_orders_meta
+2026-01-26T17:11:15+00:00 WARNING Các mẫu trống nhận được từ PTK Pattern Store
+2026-01-26T17:11:15+00:00 WARNING Các mẫu trống nhận được từ PTK Pattern Store
+2026-01-26T17:11:15+00:00 WARNING Các mẫu trống nhận được từ PTK Pattern Store
+2026-01-26T17:11:15+00:00 WARNING Các mẫu trống nhận được từ PTK Pattern Store

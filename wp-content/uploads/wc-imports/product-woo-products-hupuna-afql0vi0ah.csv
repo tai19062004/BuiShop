@@ -1,0 +1,6 @@
+﻿Type,SKU,Name,Published,Regular price,Categories,Short description,Description,Images,Attribute 1 name,Attribute 1 value(s),Attribute 1 visible,Attribute 1 global
+simple,HUP-CARTON-18-12-12,Hộp carton 18x12x12cm nắp đối,1,1770,Hộp carton,"Hộp carton nhỏ gọn, phù hợp đóng gói sản phẩm nhẹ.","Hộp carton kích thước 18x12x12cm, chất liệu carton cứng cáp, phù hợp đóng gói, vận chuyển hàng hóa nhỏ.",,Kích thước,18x12x12cm,1,1
+simple,HUP-CARTON-40-25-25,Hộp carton 40x25x25cm nắp đối,1,8200,Hộp carton,"Hộp carton kích thước lớn, dùng cho vận chuyển hàng hóa.","Hộp carton 40x25x25cm, phù hợp đóng gói hàng hóa cồng kềnh, thương mại điện tử.",,Kích thước,40x25x25cm,1,1
+simple,HUP-CARTON-16-12-6,Hộp carton 16x12x6cm nắp đối,1,1200,Hộp carton,"Hộp carton mỏng, phù hợp đóng gói mỹ phẩm, phụ kiện.","Hộp carton 16x12x6cm, thiết kế gọn nhẹ, dễ đóng gói.",,Kích thước,16x12x6cm,1,1
+simple,HUP-CARTON-25-25-5,Hộp carton 25x25x5cm nắp đối,1,3650,Hộp carton,"Hộp carton dạng mỏng, phù hợp gửi bưu kiện.","Hộp carton 25x25x5cm, phù hợp đóng gói sản phẩm dạng phẳng.",,Kích thước,25x25x5cm,1,1
+simple,HUP-CARTON-31-31-31,Hộp carton 31x31x31cm nắp đối,1,8350,Hộp carton,"Hộp carton vuông, chắc chắn.","Hộp carton 31x31x31cm, thích hợp đóng gói hàng hóa vừa.",,Kích thước,31x31x31cm,1,1
