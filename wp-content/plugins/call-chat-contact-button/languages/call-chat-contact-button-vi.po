@@ -1,0 +1,54 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Call Chat Contact Button 1.0\n"
+"Language: vi\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+msgid "Call Chat Button"
+msgstr "Nút Gọi & Chat"
+
+msgid "Call / Zalo Button Settings"
+msgstr "Cài đặt nút Gọi / Zalo"
+
+msgid "Settings saved successfully"
+msgstr "Đã lưu cài đặt thành công"
+
+msgid "Save Settings"
+msgstr "Lưu cài đặt"
+
+msgid "Phone number"
+msgstr "Số điện thoại"
+
+msgid "Zalo number"
+msgstr "Số Zalo"
+
+msgid "Display position"
+msgstr "Vị trí hiển thị"
+
+msgid "Bottom left"
+msgstr "Góc trái dưới"
+
+msgid "Top left"
+msgstr "Góc trái trên"
+
+msgid "Bottom right"
+msgstr "Góc phải dưới"
+
+msgid "Top right"
+msgstr "Góc phải trên"
+
+msgid "Invalid phone number"
+msgstr "Số điện thoại không hợp lệ"
+
+msgid "Invalid Zalo number"
+msgstr "Số Zalo không hợp lệ"
+
+msgid "Chat Zalo"
+msgstr "Chat Zalo"
+
+msgid "Call now"
+msgstr "Gọi ngay"
+
+msgid "Security check failed"
+msgstr "Lỗi bảo mật"
