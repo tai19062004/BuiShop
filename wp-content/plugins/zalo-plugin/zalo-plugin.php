@@ -104,5 +104,5 @@ add_action('admin_menu', function () {
  * - Đường dẫn: assets/admin/setting.php
  */
 function cccb_setting_page() {
-    include plugin_dir_path(__FILE__) . 'assets/admin/setting.php';
+    include plugin_dir_path(__FILE__) . './includes/admin/setting.php';
 }
