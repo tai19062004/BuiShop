@@ -12,6 +12,20 @@ if (!defined('ABSPATH')) {
 // Mảng chứa lỗi validate
 $errors  = [];
 
+$cf7_forms = [];
+
+if (post_type_exists('wpcf7_contact_form')) {
+    // Lấy tất cả form của Contact Form 7
+    $cf7_forms = get_posts([
+        'post_type'      => 'wpcf7_contact_form',
+        'posts_per_page' => -1,
+        'post_status'    => 'publish',
+        'suppress_filters' => true,
+    ]);
+}
+
+error_log('CF7 post type exists: ' . count($cf7_forms));
+
 // Cờ hiển thị thông báo thành công
 $success = false;
 
@@ -44,14 +58,19 @@ if (isset($_POST['cccb_save'])) {
     $zaloRaw  = trim($_POST['cccb_zalo'] ?? '');
 
     // Vị trí hiển thị
+    // Làm sạch text để tránh XSS
+    // ❌ Loại bỏ HTML / JS (<script>, <b>, <img>…)
+    // ❌ Loại bỏ ký tự nguy hiểm
+    // ❌ Xóa xuống dòng, tab dư thừa
     $position = sanitize_text_field($_POST['cccb_position'] ?? 'bottom-left');
 
     // Màu nút (sanitize theo chuẩn hex)
+    // Ví dụ: #ff0000
     $phoneColor = sanitize_hex_color($_POST['cccb_phone_color'] ?? '#0084ff');
     $zaloColor  = sanitize_hex_color($_POST['cccb_zalo_color'] ?? '#ff3a3a');
 
-    // CF7 shortcode
-    $cf7Raw = trim( wp_unslash( $_POST['cccb_cf7_shortcode'] ?? '' ) );
+    // absint chỉ cho phép số nguyên dương tránh XSS, SQL Injection
+    $form_id = absint($_POST['cccb_cf7_form_id'] ?? 0);
 
     // Màu nút liên hệ
     $formColor = sanitize_hex_color($_POST['cccb_form_color'] ?? '#00b894');
@@ -73,12 +92,10 @@ if (isset($_POST['cccb_save'])) {
         $errors[] = __('Invalid Zalo number', 'call-chat-contact-button');
     }
 
-    // Validate shortcode CF7 (chỉ cho phép contact-form-7)
-    if ($cf7Raw && !preg_match('/^\[contact-form-7\s+.*\]$/', $cf7Raw)) {
-        $errors[] = __('Invalid Contact Form 7 shortcode', 'call-chat-contact-button');
+    // Validate Contact Form 7 form ID
+    if ($form_id && get_post_type($form_id) !== 'wpcf7_contact_form') {
+        $errors[] = __('Invalid Contact Form selected', 'call-chat-contact-button');
     }
-
-    error_log('CF7 shortcode SAVED: ' . get_option('cccb_cf7_shortcode'));
 
     /**
      * ============================
@@ -102,7 +119,7 @@ if (isset($_POST['cccb_save'])) {
         update_option('cccb_position', $position);
         update_option('cccb_phone_color', $phoneColor);
         update_option('cccb_zalo_color', $zaloColor);
-        update_option('cccb_cf7_shortcode', $cf7Raw);
+        update_option('cccb_cf7_form_id', $form_id);
         update_option('cccb_form_color', $formColor);
         $success = true;
     }
@@ -205,18 +222,24 @@ if (isset($_POST['cccb_save'])) {
             <tr>
                 <th><?php _e('Contact form (CF7)', 'call-chat-contact-button'); ?></th>
                 <td>
-                    <input type="text"
-                        name="cccb_cf7_shortcode"
-                        class="large-text"
-                        placeholder="[contact-form-7 id=&quot;123&quot;]"
-                        value="<?php echo esc_attr(get_option('cccb_cf7_shortcode')); ?>">
+                    <?php
+                    $selected_form = get_option('cccb_cf7_form_id');
+                    ?>
 
-                    <p class="description">
-                        <?php _e('Paste Contact Form 7 shortcode here', 'call-chat-contact-button'); ?>
-                    </p>
+                    <select name="cccb_cf7_form_id">
+                        <option value="">
+                            <?php _e('-- Select a contact form --', 'call-chat-contact-button'); ?>
+                        </option>
+
+                        <?php foreach ($cf7_forms as $form): ?>
+                            <option value="<?php echo esc_attr($form->ID); ?>"
+                                <?php selected($selected_form, $form->ID); ?>>
+                                <?php echo esc_html($form->post_title); ?>
+                            </option>
+                        <?php endforeach; ?>
+                    </select>
 
                     <label>
-                        <?php _e('Button color:', 'call-chat-contact-button'); ?>
                         <input type="color"
                             name="cccb_form_color"
                             value="<?php echo esc_attr(get_option('cccb_form_color', '#00b894')); ?>">

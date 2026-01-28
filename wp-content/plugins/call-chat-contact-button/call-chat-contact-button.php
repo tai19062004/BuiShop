@@ -53,17 +53,17 @@ add_action('wp_enqueue_scripts', function () {
  */
 add_action('wp_footer', function () {
 
-    $phone      = get_option('cccb_phone');
-    $zalo       = get_option('cccb_zalo');
-    $cf7        = get_option('cccb_cf7_shortcode');
-    $position   = get_option('cccb_position', 'bottom-left');
-    $phoneColor = get_option('cccb_phone_color', '#0084ff');
-    $zaloColor  = get_option('cccb_zalo_color', '#ff3a3a');
-    $formColor  = get_option('cccb_form_color', '#00b894');
+    $phone        = get_option('cccb_phone');
+    $zalo         = get_option('cccb_zalo');
+    $cf7_form_id  = get_option('cccb_cf7_form_id');
+    $position     = get_option('cccb_position', 'bottom-left');
+    $phoneColor   = get_option('cccb_phone_color', '#0084ff');
+    $zaloColor    = get_option('cccb_zalo_color', '#ff3a3a');
+    $formColor    = get_option('cccb_form_color', '#00b894');
 
-    if (empty($phone) && empty($zalo) && empty($cf7)) return;
+    if (empty($phone) && empty($zalo) && empty($cf7_form_id)) return;
 
-    $zaloLink = 'https://zalo.me/' . $zalo;
+    $zaloLink = $zalo ? 'https://zalo.me/' . $zalo : '';
     ?>
 
     <div class="zalo-float-container pos-<?php echo esc_attr($position); ?>">
@@ -85,16 +85,20 @@ add_action('wp_footer', function () {
             </a>
         <?php endif; ?>
 
-        <?php if ($cf7): ?>
+        <?php if ($cf7_form_id): ?>
             <button class="cccb-btn contact zalo-float-btn contact-btn"
-                    style="background:<?php echo esc_attr($formColor); ?>">Contact</button>
+                    style="background:<?php echo esc_attr($formColor); ?>">
+                <?php esc_html_e('Contact', 'call-chat-contact-button'); ?>
+            </button>
         <?php endif; ?>
     </div>
-    <?php if ($cf7): ?>
+
+    <!-- post_type_exists dùng để kiểm tra xem Contact Form 7 có tồn tại không -->
+    <?php if ($cf7_form_id && post_type_exists('wpcf7_contact_form')): ?>
         <div class="cccb-popup-overlay">
             <div class="cccb-popup">
                 <button class="cccb-close">&times;</button>
-                <?php echo do_shortcode($cf7); ?>
+                <?php echo do_shortcode('[contact-form-7 id="' . intval($cf7_form_id) . '"]'); ?>
             </div>
         </div>
     <?php endif; ?>
