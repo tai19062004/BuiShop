@@ -36,6 +36,14 @@ add_action('wp_enqueue_scripts', function () {
         [],
         filemtime(plugin_dir_path(__FILE__) . 'assets/css/style.css')
     );
+
+    wp_enqueue_script(
+        'cccb-script',
+        plugin_dir_url(__FILE__) . 'assets/js/script.js',
+        [],
+        filemtime(plugin_dir_path(__FILE__) . 'assets/js/script.js'),
+        true
+    );
 });
 
 /**
@@ -47,11 +55,13 @@ add_action('wp_footer', function () {
 
     $phone      = get_option('cccb_phone');
     $zalo       = get_option('cccb_zalo');
+    $cf7        = get_option('cccb_cf7_shortcode');
     $position   = get_option('cccb_position', 'bottom-left');
     $phoneColor = get_option('cccb_phone_color', '#0084ff');
     $zaloColor  = get_option('cccb_zalo_color', '#ff3a3a');
+    $formColor  = get_option('cccb_form_color', '#00b894');
 
-    if (empty($phone) && empty($zalo)) return;
+    if (empty($phone) && empty($zalo) && empty($cf7)) return;
 
     $zaloLink = 'https://zalo.me/' . $zalo;
     ?>
@@ -75,7 +85,19 @@ add_action('wp_footer', function () {
             </a>
         <?php endif; ?>
 
+        <?php if ($cf7): ?>
+            <button class="cccb-btn contact zalo-float-btn contact-btn"
+                    style="background:<?php echo esc_attr($formColor); ?>">Contact</button>
+        <?php endif; ?>
     </div>
+    <?php if ($cf7): ?>
+        <div class="cccb-popup-overlay">
+            <div class="cccb-popup">
+                <button class="cccb-close">&times;</button>
+                <?php echo do_shortcode($cf7); ?>
+            </div>
+        </div>
+    <?php endif; ?>
 <?php
 });
 
